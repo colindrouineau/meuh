@@ -57,6 +57,7 @@ with app.app_context():
     create_user('admin', '.', 'admin')
 
 
+
 '''
 #ce que copilot a proposé, mais ça fonctionne pas encore
 @app.route('/register', methods=['GET', 'POST'])

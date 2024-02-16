@@ -17,6 +17,11 @@ db.init_app(app)
 def site():
     return 'BAAAAAAA'
 
+#essai d'une autre page
+@app.route('/home')
+def home():
+    return 'Home'
+
 #un user
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,11 +31,21 @@ class User(db.Model):
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
 
+
 #créer un user
 def create_user(username, email, password):
     user = User(username=username, email=email, password=password)
     db.session.add(user)
     db.session.commit()
+
+@app.route('/index')
+def index():
+    students = User.query.all()
+    return render_template('index.html', students=students)
+
+@app.route('/essai')
+def essai():
+    return "essai"
 
 if __name__ == '__main__':
     app.run()
@@ -41,6 +56,8 @@ with app.app_context():
     db.session.commit()
     create_user('admin', '.', 'admin')
 
+
+'''
 #ce que copilot a proposé, mais ça fonctionne pas encore
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -49,3 +66,4 @@ def register():
         flash(f'Account created for {form.username.data}!', 'success')
         return redirect(url_for('site'))
     return render_template('register.html', title='Register', form=form)
+'''

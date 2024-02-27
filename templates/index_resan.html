@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %} {% endblock %} - MEUH</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">MEUH</a>
+        <a href="/signup">Sign up</a>
+    </nav>
+    <hr>
+    <div class="content">
+        {% block content %} {% endblock %}
+    </div>
+</body>

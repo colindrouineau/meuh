@@ -7,9 +7,12 @@
     <form method="POST" action="/">
         <dl>
          {{ form.csrf_token }}
+         <p> First Name</p>
          {{ render_field(form.first_name) }}
+         <p> Last Name</p>
          {{ render_field(form.last_name) }}
-         {{ render_field(form.submit)}}
+         <br>
+         {{render_field(form.submit)}}
          </dl>
      </form>
 </body>

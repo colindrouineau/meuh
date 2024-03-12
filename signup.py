@@ -86,9 +86,13 @@ def login():
             if d['id'] in [user.username for user in users]:
                 user=User.query.filter_by(username=d['id']).first()
                 if user.password==d['password']:
-                    return redirect(url_for('home'))
+                    return redirect(url_for('logged_in'))
             else:
                 return '<p>Utilisateur non trouvé</p> <hr> <a href="/signup">Inscrivez-vous !</a>'
     return render_template('login.html', form=form)
+
+@app.route('/logged_in')
+def logged_in():
+    return 'Vous êtes connecté'
 
 app.run()

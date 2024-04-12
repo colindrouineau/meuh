@@ -3,6 +3,7 @@ from flask import Flask, request, render_template, redirect, url_for
 from flask_wtf import FlaskForm, Form
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from flask_sqlalchemy import SQLAlchemy
+from accueil import accueil
 
 #initialisation des databases
 db = SQLAlchemy()
@@ -45,7 +46,8 @@ def signup():
 
 @app.route('/suite')
 def suite():
-    return (d['first_name'] + ' ' + d['last_name'])
+    return redirect(url_for('accueil'))
+    return ('Bienvenue' + d['first_name'] + ' ' + d['last_name']+'!')
 
 class MyForm(Form):
     id=StringField('Identifiant')
@@ -93,6 +95,7 @@ def login():
 
 @app.route('/logged_in')
 def logged_in():
+    return redirect(url_for('accueil'))
     return 'Vous êtes connecté'
 
 app.run()

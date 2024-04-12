@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+/* Style du menu */
+.menu {
+  width: 200px;
+  background-color: #ffffff;
+  padding: 15px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+/* Style des éléments du menu lorsqu'ils sont fermés */
+.menu div {
+  display: none;
+  margin-top: 10px;
+  background-color: #c3e3bb;
+}
+</style>
+<script>
+function toggleMenu(menuId) {
+  var x = document.getElementById(menuId);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+</head>
+<body>
+
+<a href='/'> Accueil </a> 
+<br>
+<br>
+<br>
+<p> Cliquez sur le produit dont vous voulez la recette, elle s'affichera en dessous </p>
+
+
+<div class="menu" onclick="toggleMenu('menu1')">
+  Yaourt
+  <div id="menu1">
+    <a> on commence par mettre le lait <a><br>
+    <a> on allume la yourtière <a><br>
+    <a> et on attend  <a><br>
+    <a> c'est fini ! trop fastoche <a><br>
+  </div>
+</div>
+
+<div class="menu" onclick="toggleMenu('menu2')">
+  Crème dessert
+  <div id="menu2">
+    <a> on commence par mettre le lait <a><br>
+    <a> on ajoute l'arôme <a><br>
+    <a> miam miam <a><br>
+  </div>
+</div>
+
+</body>
+</html>

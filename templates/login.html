@@ -1,18 +1,12 @@
 {% from "_formhelpers.html" import render_field %}
 <html>
 <head>
-    <title>Signup Page</title>
+    <title>Login Page</title>
 </head>
 <body>
-    <form method="POST" action="/signup">
+    <form method="POST" action="/login">
         <dl>
          {{ form.csrf_token }}
-         <p> First Name</p>
-         {{ render_field(form.first_name) }}
-         <p> Last Name</p>
-         {{ render_field(form.last_name) }}
-         <p> Email</p>
-         {{ render_field(form.email) }}
          <p>Identifiant</p>
          {{ render_field(form.id) }}
          <p>Mot de passe</p>

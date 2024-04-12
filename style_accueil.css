@@ -1,0 +1,23 @@
+a{color : black;}
+body {background-image: url("Backdrop_cow.jpg");background-position: center;background-size : 1500px;}
+
+form {
+  width: 500px;
+  margin: 0 auto;
+}
+
+div {
+  margin-bottom: 10px;
+}
+
+fieldset {
+  background: rgb(189, 255, 189);
+  border : 50px rgb(117, 170, 117);
+}
+
+legend {
+  padding: 10px;
+  background: rgb(75, 107, 63);
+  color: white;
+}
+

@@ -3,13 +3,16 @@ from flask import Flask, request, render_template, redirect, url_for
 from flask_wtf import FlaskForm, Form
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from flask_sqlalchemy import SQLAlchemy
-from accueil import accueil
+from flask import Flask, request, render_template
+from datetime import datetime 
 
 #initialisation des databases
 db = SQLAlchemy()
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db.init_app(app)
+
+static_folder = 'static'
 
 #variables globales (temporaire)
 FIRST_NAME = ''
@@ -34,10 +37,11 @@ def signup():
         d['email']=form.email.data
         with app.app_context():
             users=User.query.all()
-            if d['id'] in [user.username for user in users]:
-                return '<p>Utilisateur déjà existant</p> <hr> <a href="/login">Connectez-vous !</a>'
-            if d['email'] in [user.email for user in users]:
-                return '<p>Email déjà utilisé</p> <hr> <a href="/login">Connectez-vous !</a>'
+            if users != []:
+                if d['id'] in [user.username for user in users]:
+                    return '<p>Utilisateur déjà existant</p> <hr> <a href="/login">Connectez-vous !</a>'
+                if d['email'] in [user.email for user in users]:
+                    return '<p>Email déjà utilisé</p> <hr> <a href="/login">Connectez-vous !</a>'
             db.create_all()
             db.session.commit()
             create_user(d['id'],d['first_name'], d['last_name'], d['password'], d['email'])
@@ -47,7 +51,6 @@ def signup():
 @app.route('/suite')
 def suite():
     return redirect(url_for('accueil'))
-    return ('Bienvenue' + d['first_name'] + ' ' + d['last_name']+'!')
 
 class MyForm(Form):
     id=StringField('Identifiant')
@@ -83,6 +86,8 @@ def login():
     if form.submit.data:
         d['id']=form.id.data
         d['password']=form.password.data
+        d['first_name']=User.query.filter_by(username=d['id']).first().first_name
+        d['last_name']=User.query.filter_by(username=d['id']).first().last_name
         with app.app_context():
             users=User.query.all()
             if d['id'] in [user.username for user in users]:
@@ -96,6 +101,32 @@ def login():
 @app.route('/logged_in')
 def logged_in():
     return redirect(url_for('accueil'))
-    return 'Vous êtes connecté'
+
+#accueil
+@app.route("/accueil")
+def accueil():
+    current_date = datetime.now().strftime("%d-%m-%Y")
+    tasks = ["task_1", "task_2", "task_3"]
+    name=[d['first_name'], d['last_name']]
+    print(name)
+    # il faudrait trouver un moyen d'ajouter les tasks de la journée en fonction de la journée
+    # et updater les tasks tous les jours, en les reliant à la base de données ?
+    return render_template('index_accueil.html', current_date=current_date, tasks = tasks, name=name)
+
+
+@app.route("/calendrier")
+def calendrier():
+    return render_template("calendrier.html")
+
+
+@app.route("/recettes")
+def recettes():
+    return render_template("menu.html")
+
+
+@app.route("/parametres")
+def parametres():
+    return "<h1>Paramètres</h1> <a href='/'> Accueil </a> <br> <p>ici c'est pour gérer les paramètres ;)</p> <p> genre les notifs, le mot de passe ... </p>"
+
 
 app.run()

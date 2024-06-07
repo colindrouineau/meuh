@@ -27,13 +27,16 @@ def create_task(name, date, done=False):
 with app.app_context():
     db.create_all()
     db.session.commit()
-    create_task("task_test1", datetime.now().date()) #??
+    create_task("task_test1", datetime.now().date())
     create_task("task_test2", datetime.now())
 
 @app.route("/", methods=["GET", "POST"])
 def accueil():
-    current_date = datetime.now().strftime("%d-%m-%Y")
+    #current_date = datetime.now().strftime("%d-%m-%Y")
+    current_date = datetime.now().date()
+    print (current_date)
     tasks= Task.query.filter_by(date=current_date).all() 
+    print(tasks)
     #fonctionne pas car prend en compte date +heure je pense...
     if request.method == "POST":
         for task in tasks:

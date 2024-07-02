@@ -6,10 +6,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, request, render_template
 from datetime import datetime 
 
+import pathlib as pl 
+
+root_dir = pl.Path(__file__).parent
+db_path = root_dir / 'instance' / 'site.db'
+
 #initialisation des databases
 db = SQLAlchemy()
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
 db.init_app(app)
 
 static_folder = 'static'
@@ -18,7 +23,7 @@ static_folder = 'static'
 FIRST_NAME = ''
 LAST_NAME = ''
 
-d={'first_name':FIRST_NAME, 'last_name':LAST_NAME}
+d={'first_name':FIRST_NAME, 'last_name':LAST_NAME, 'id':''}
 
 #page d'accueil
 @app.route('/')
@@ -102,6 +107,7 @@ def login():
 def logged_in():
     return redirect(url_for('accueil'))
 
+'''
 #accueil
 @app.route("/accueil")
 def accueil():
@@ -112,6 +118,41 @@ def accueil():
     # il faudrait trouver un moyen d'ajouter les tasks de la journée en fonction de la journée
     # et updater les tasks tous les jours, en les reliant à la base de données ?
     return render_template('index_accueil.html', current_date=current_date, tasks = tasks, name=name)
+'''
+class Task(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    date = db.Column(db.String(100), nullable=False)
+    done = db.Column(db.Boolean, nullable=False, default=False)
+
+def create_task(name, date, done=False):
+    task = Task(name=name, date=date, done=done)
+    db.session.add(task)
+    db.session.commit()
+
+with app.app_context():
+    db.create_all()
+    db.session.commit()
+    create_task("task_test1", datetime.now().date())
+    create_task("task_test2", datetime.now())
+
+@app.route("/accueil", methods=["GET", "POST"])
+def accueil():
+    current_date = datetime.now().strftime("%d-%m-%Y")
+    tasks= Task.query.filter_by(date=current_date).all()
+    completed_tasks = []
+    if request.method == "POST":
+        completed_tasks = request.form.getlist("important_tasks")
+        print(completed_tasks)
+        print (tasks)
+        for task in tasks:
+            if str(task) in completed_tasks:
+                print ("DONE")
+                tasks.remove(task)
+                Task.query.filter_by(name=task.name, date=current_date).delete()
+                create_task(name=task.name, date=current_date, done=True)
+        db.session.commit()
+    return render_template('index_accueil.html', current_date=current_date, tasks = tasks, completed_tasks=completed_tasks, name=[d['first_name'], d['last_name']])
 
 
 @app.route("/calendrier")
@@ -126,7 +167,7 @@ def recettes():
 
 @app.route("/parametres")
 def parametres():
-    return "<h1>Paramètres</h1> <a href='/'> Accueil </a> <br> <p>ici c'est pour gérer les paramètres ;)</p> <p> genre les notifs, le mot de passe ... </p>"
+    return "<h1>Paramètres</h1> <a href='/accueil'> Accueil </a> <br> <p>ici c'est pour gérer les paramètres ;)</p> <p> genre les notifs, le mot de passe ... </p>"
 
 
 app.run()

@@ -1,6 +1,6 @@
 let nav = 0;
 let clicked = null;
-let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : {};
+let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
 
 const calendar = document.getElementById('calendar');
 const newEventModal = document.getElementById('newEventModal');
@@ -14,7 +14,12 @@ function openModal(date) {
 
   const eventForDay = events.find(e => e.date === clicked);
 
-  newEventModal.style.display = 'block';
+  if (eventForDay) {
+    document.getElementById('eventText').innerText = eventForDay.title;
+    deleteEventModal.style.display = 'block';
+  } else {
+    newEventModal.style.display = 'block';
+  }
 
   backDrop.style.display = 'block';
 }
@@ -46,35 +51,33 @@ function load() {
 
   calendar.innerHTML = '';
 
-  for (let i = 1; i <= paddingDays + daysInMonth; i++) {
+  for(let i = 1; i <= paddingDays + daysInMonth; i++) {
     const daySquare = document.createElement('div');
     daySquare.classList.add('day');
-  
+
     const dayString = `${month + 1}/${i - paddingDays}/${year}`;
-  
+
     if (i > paddingDays) {
       daySquare.innerText = i - paddingDays;
-      const eventsForDay = events[dayString];
-  
+      const eventForDay = events.find(e => e.date === dayString);
+
       if (i - paddingDays === day && nav === 0) {
         daySquare.id = 'currentDay';
       }
-  
-      if (eventsForDay) {
-        eventsForDay.forEach(event => {
-          const eventDiv = document.createElement('div');
-          eventDiv.classList.add('event');
-          eventDiv.innerText = event.title; // Corrected from eventForDay.title
-          daySquare.appendChild(eventDiv);
-        });
+
+      if (eventForDay) {
+        const eventDiv = document.createElement('div');
+        eventDiv.classList.add('event');
+        eventDiv.innerText = eventForDay.title;
+        daySquare.appendChild(eventDiv);
       }
-  
+
       daySquare.addEventListener('click', () => openModal(dayString));
     } else {
       daySquare.classList.add('padding');
     }
-  
-    calendar.appendChild(daySquare);
+
+    calendar.appendChild(daySquare);    
   }
 }
 
@@ -92,19 +95,15 @@ function saveEvent() {
   if (eventTitleInput.value) {
     eventTitleInput.classList.remove('error');
 
-    if (events[clicked]) {
-      events[clicked].push({
-        title: eventTitleInput.value
-      });
-    } else {
-      events[clicked] = [{
-        title: eventTitleInput.value
-      }];
-    }
+    events.push({
+      date: clicked,
+      title: eventTitleInput.value,
+    });
 
     localStorage.setItem('events', JSON.stringify(events));
+
     closeModal();
-    load(); // Reload the calendar to display the added event
+  
   } else {
     eventTitleInput.classList.add('error');
   }

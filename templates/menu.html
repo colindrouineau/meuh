@@ -4,28 +4,28 @@
 <style>
 /* Style du menu */
 .menu {
-  width: 200px;
-  background-color: #ffffff;
-  padding: 15px;
-  cursor: pointer;
-  margin-bottom: 10px;
+ width: 1000px;
+ background-color: #ffffff;
+ padding: 15px;
+ cursor: pointer;
+ margin-bottom: 10px;
 }
 
 /* Style des éléments du menu lorsqu'ils sont fermés */
 .menu div {
-  display: none;
-  margin-top: 10px;
-  background-color: #c3e3bb;
+ display: none;
+ margin-top: 30px;
+ background-color: #c5eeba;
 }
 </style>
 <script>
 function toggleMenu(menuId) {
-  var x = document.getElementById(menuId);
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
+ var x = document.getElementById(menuId);
+ if (x.style.display === "none") {
+   x.style.display = "block";
+ } else {
+   x.style.display = "none";
+ }
 }
 </script>
 </head>
@@ -35,27 +35,231 @@ function toggleMenu(menuId) {
 <br>
 <br>
 <br>
-<p> Cliquez sur le produit dont vous voulez la recette, elle s'affichera en dessous </p>
+<p> Cliquez 2 fois sur le produit dont vous voulez la recette, elle s'affichera en dessous </p>
 
 
 <div class="menu" onclick="toggleMenu('menu1')">
-  Yaourt
-  <div id="menu1">
-    <a> on commence par mettre le lait <a><br>
-    <a> on allume la yourtière <a><br>
-    <a> et on attend  <a><br>
-    <a> c'est fini ! trop fastoche <a><br>
-  </div>
+ <b>Lait pasteurisé</b>
+ <div id="menu1">
+   <a> 1- Collecte et approvisionnement lait depuis le tank à 6°C <a><br>
+   <a> 2- Pasteurisation à 75 °C, 1h40 de montée en température, 15 min de maintien (CCP) <a><br>
+   <a> 3- Conditionnement à chaud entre 70°C et 75°C (PrPo) <a><br>
+   <a> 4- Refroidissement à 6°C en 6h (PrPo) <a><br>
+   <a>5- Déplacement vers la chambre froide à 6°C et stockage à 6°C </a><br>
+ </div>
 </div>
 
 <div class="menu" onclick="toggleMenu('menu2')">
-  Crème dessert
-  <div id="menu2">
-    <a> on commence par mettre le lait <a><br>
-    <a> on ajoute l'arôme <a><br>
-    <a> miam miam <a><br>
-  </div>
+ <b>Yaourts étuvés</b>
+ <div id="menu2">
+   <a> 1- Collecte et approvisionnement lait depuis le tank à 6°C <a><br>
+   <a> 2- Ajout poudre lait <a><br>
+   <a> 3- Pasteurisation à 75 °C, 1h40 de montée en température, 15 min de maintien (CCP) <a><br>
+   <a> 4- Refroidissement à 45°C en 45 min (PrPo) <a><br>
+   <a> 5- Ensemencement à 45°C <a><br>
+   <a> 6- Ajout d’arôme et sucre <a><br>
+   <a> 7- Conditionnement. Nettoyage <a><br>
+   <a> 8- Etuvage à 45°C pour 5 à 7h (PrPo) <a><br>
+   <a> 9- Refroidissement à 6°C en 6h <a><br>
+   <a> 10- Déplacement vers la chambre froide à 6°C et stockage à 6°C <a><br>
+ </div>
+</div>
+
+<div class="menu" onclick="toggleMenu('menu3')">
+ <b>Crème dessert</b>
+ <div id="menu3">
+   <a> 1- Transfert du lait du tank à lait au pasteurisateur <a><br>
+   <a> 2- Ajout de sucre et d’arômes <a><br>
+   <a> 3- Montée en température à 78°C <a><br>
+   <a> 4- Mixage des poudres dans du lait froid et transfert dans le pasteurisateur, T° >= 65°C et pas plus de 15 min <= 70°C (PrPo 1) <a><br>
+   <a> 5- Pasteurisation à 78°C et traitement thermique, 1 h de cuisson minimum avec maintien en température à 78°C (CCP) <a><br>
+   <a> 6- Conditionnement à chaud >= 70°C (PrPo 2) <a><br>
+   <a> 7- Refroidissement à 6°C en 6h, dans la zone de refroidissement (PrPo 3) <a><br>
+   <a> 8- Déplacement vers la chambre froide à 6°C et stockage à 6°C maximum <a><br>
+   <a> 9- Préparation et expédition <a><br>
+ </div>
+</div>
+
+
+<p> Quelques informations sur le nettoyage : </p>
+
+<div class="menu" onclick="toggleMenu('menu4')">
+ <b>Nettoyage crème dessert</b>
+ <div id="menu4">
+   <a>1 fois par jour</a>
+   <ul>
+       <li>
+           Naturalle et Naldex
+           <ul>
+               <li>conditionneuse</li>
+               <li>pasteurisateur</li>
+               <li>Lave main</li>
+               <li>Petits matériels</li>
+           </ul>
+       </li>
+       <li>
+           Naturalle
+           <ul>
+               <li>sol</li>
+               <li>zone de froid</li>
+               <li>sas sanitaire</li>
+           </ul>
+       </li>
+   </ul>
+   <a>1 fois par semaine</a>
+   <ul>
+       <li>
+           Naldex
+           <ul>
+               <li>murs</li>
+               <li>rideaux lanières</li>
+               <li>sas sanitaire</li>
+               <li>sol</li>
+               <li>étagères</li>
+           </ul>
+       </li>
+   </ul>
+   <a>1 fois par mois</a>
+   <ul>
+       <li>
+           Acide traité
+           <ul>
+               <li>conditionneuse</li>
+               <li>pasteurisateur</li>
+           </ul>
+       </li>
+   </ul>
+   <a>1 fois par mois paire</a>
+   <ul>
+       <li>
+           Naldex
+           <ul>
+               <li>plafonds</li>
+           </ul>
+       </li>
+   </ul>
+   <a>1 fois par mois impaire</a>
+   <ul>
+       <li>
+           Naturelle
+           <ul>
+               <li>plafonds</li>
+           </ul>
+       </li>
+   </ul>
+ </div>
+</div>
+
+<div class="menu" onclick="toggleMenu('menu5')">
+ <b>Nettoyage yaourt</b>
+ <div id="menu5">
+   <a>1 fois par jour</a>
+   <ul>
+       <li>
+           Naturalle
+           <ul>
+               <li>conditionneuse</li>
+               <li>pasteurisateur</li>
+               <li>sol</li>
+               <li>zone de froid</li>
+               <li>sac sanitaire</li>
+               <li>rideaux lanières</li>
+           </ul>
+       </li>
+       <li>
+           Naturalle
+           <ul>
+               <li>lave main</li>
+               <li>petits matériels</li>
+               <li>poubelle</li>
+           </ul>
+       </li>
+       <li>
+         Alcalin
+         <ul>
+             <li>tuyau d'alimentation du lait</li>
+         </ul>
+     </li>
+   </ul>
+   <a>1 fois par semaine</a>
+   <ul>
+       <li>
+           Naturelle
+           <ul>
+               <li>murs</li>
+               <li>étagères</li>
+           </ul>
+       <li>
+           Naldex
+           <ul>
+               <li>conditionneuse</li>
+               <li>rideaux lanières</li>
+               <li>sas sanitaire</li>
+               <li>sol/li>
+               <li>pasteurisateur</li>
+               <li>zone de froid</li>
+           </ul>
+         </li>
+       </li>
+   </ul>
+   <a>1 fois toutes les 2 semaines</a>
+   <ul>
+       <li>
+           Naldex
+           <ul>
+               <li>murs</li>
+               <li>étagères</li>
+           </ul>
+         </li>
+       </li>
+   </ul>
+   <a>1 fois par mois</a>
+   <ul>
+       <li>
+           Naturalle
+           <ul>
+               <li>plafonds</li>
+               <li>CF</li>
+               <li>stockage</li>
+           </ul>
+       </li>
+       <li>
+         Acide traité
+         <ul>
+             <li>conditionneuse</li>
+             <li>pasteurisateur</li>
+         </ul>
+     </li>
+   </ul>
+   <a>1 fois tous les 2 mois</a>
+   <ul>
+       <li>
+           Naldex
+           <ul>
+               <li>plafonds</li>
+           </ul>
+       </li>
+   </ul>
+   <a>1 fois tous les trois mois</a>
+   <ul>
+       <li>
+           Naldex
+           <ul>
+               <li>CF</li>
+               <li>stockage</li>
+           </ul>
+       </li>
+   </ul>
+ </div>
+</div>
+
+<div class="menu" onclick="toggleMenu('menu6')">
+ <b>Analyse des produits</b>
+ <div id="menu6">
+   <a>1 fois tous les 2 mois : échantillon yaourt </a>
+   <a>1 fois tous les 3 mois : échantillon crème dessert </a>
+ </div>
 </div>
 
 </body>
-</html>
+</html> 

@@ -69,6 +69,21 @@
                 <option value="yaourt_framboise">yaourt framboise</option>
             </select>
 
+            <br><br> 
+
+             <!-- New dropdown for selecting aroma -->
+           <label for="aroma_type">Choisissez un arôme :</label>
+           <select name="aroma_type" id="aroma_type">
+               <option value="fraise">Framboise</option>
+               <option value="vanille">Vanille</option>
+           </select>
+
+           <br><br>
+
+           <!-- Input box for entering serial number of the selected aroma -->
+           <label for="aroma_serial_number">Entrez le numéro de série d'arôme :</label>
+           <input type="text" id="aroma_serial_number" name="aroma_serial_number" />
+
             <br>
             <br>
             <div>
@@ -78,7 +93,6 @@
                     {% for task in completed_tasks %}
                     <li>{{ task }}</li>
                     {% endfor %}
-                
             </div>
         </fieldset>
     </form>

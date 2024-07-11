@@ -122,11 +122,11 @@ def create_task(name, date, done=False):
     db.session.commit()
 
 #Permet de créer des tâches pour vérifier le fonctionnement de l'algo
+
 with app.app_context():
     db.create_all()
     db.session.commit()
     create_task("task_test1", datetime.now().date())
-    create_task("task_test2", datetime.now())
 
 #Page d'accueil
 @app.route("/accueil", methods=["GET", "POST"])

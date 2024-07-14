@@ -3,8 +3,8 @@ dependencies:
   - python==3.11.4
   - flask
   - datetime
-  - flask_sqlalchemy
-  - flask_wtf
+  - flask-sqlalchemy
+  - flask-wtf
   - wtforms
   - sqlalchemy
   - win32com.client

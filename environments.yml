@@ -1,0 +1,13 @@
+name: dev-meuh
+dependencies:
+  - python==3.11.4
+  - flask
+  - datetime
+  - flask_sqlalchemy
+  - flask_wtf
+  - wtforms
+  - sqlalchemy
+  - win32com.client
+  - sqlite3
+  - pandas
+  - pathlib

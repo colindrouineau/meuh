@@ -17,3 +17,16 @@ Nous ne l'avons pas implémenté, mais on pourrait imaginer avoir une version se
 
 How to launch the code :
 Start signup.py
+
+BUGs remarqués :
+- pb avec task sur l'accueil. Quand on coche puis envoie plusieurs tâches, ça ne fonctionne pas toujours bien :
+" avez vous fait <Task 162> ? ...  vous avez accompli les tâches suivantes :
+
+    <Task 161>
+    <Task 162>
+"
+
+Reste à faire :
+- page paramètres
+- calendrier
+- réfléchir à comment agencer ce qu'on a 

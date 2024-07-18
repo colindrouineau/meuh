@@ -16,7 +16,22 @@ Nous ne l'avons pas implémenté, mais on pourrait imaginer avoir une version se
 
 
 How to launch the code :
-Start signup.py
+- install all the environments in environment.yml
+- Start app.py
+
+
+À quoi servent tous les documents sur ce repo GitHub ?
+
+Il y a le premier document : app.py qui est le document principal qui crée l’architecture du site.
+Ce code python renvoie vers tous les autres documents du repo.
+
+- Le document HTML “home.html” qui permet de donner les noms aux boutons de connexion et d’inscription.
+- Le document HTML “signup.html” qui crée le format des cases d’inscription (Nom, prénom, email, identifiant et mot de passe)
+- Le document HTML “login.html” qui crée le format des cases de connexion (identifiant et mot de passe)
+- Le document HTML “index_accueil.html” qui crée la page d’accueil du site. Ce code HTML permet de créer les boutons qui redirigent vers les pages “paramètres”, “recettes” et “calendrier”, donne la date du jour et créé les cases à cocher des tasks du jour ainsi que le menu déroulant des produits à faire.
+- Le document HTML “calendrier.html”. Ce document renvoie aux codes CSS et JavaScipt aux noms calendrier.css et calendrier.js. Ces trois documents permettent de formater le calendrier que nous voulons. Le principal problème pour l’instant est l’accès aux évènements créés. Nous n’arrivons pas à synchroniser le calendrier avec la base de donnée, ainsi pour le moment, aucun des évènements rajoutés dans le calendrier ne s’ajoutent automatiquement dans la base de données et donc dans les tasks à faire dans la journée. Nous pensons qu’une manière de faire ça est de transformer les évènements en “bouton”, ainsi nous pourrions accéder directement à la valeur de l’évènement et donc l’ajouter dans la BDD.
+- Le document HTML “menu.html” qui créé l’onglet “recettes” (toutes les recettes des produits ainsi que les notices de nettoyage).
+
 
 BUGs remarqués :
 - pb avec task sur l'accueil. Quand on coche puis envoie plusieurs tâches, ça ne fonctionne pas toujours bien :
@@ -26,7 +41,7 @@ BUGs remarqués :
     <Task 162>
 "
 
-Reste à faire :
+Reste à faire (en plus des points précédents) :
 - page paramètres
 - calendrier
 - réfléchir à comment agencer ce qu'on a 
